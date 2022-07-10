@@ -1,5 +1,6 @@
 package ro.fasttrackit.tema9exerc1.controller;
 
+import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.web.bind.annotation.*;
 import ro.fasttrackit.tema9exerc1.model.*;
 import ro.fasttrackit.tema9exerc1.service.*;
@@ -31,9 +32,16 @@ public class RoomController
 		else
 			return null;
 	}
+
+	@GetMapping("{id}/reviews")
+	List<Review> getReviewsById(@PathVariable String id)
+	{
+		return service.getReviewsById(id);
+	}
 	
 	@DeleteMapping("{id}")
-	RoomEntity delete(@PathVariable String id) {
+	RoomEntity delete(@PathVariable String id)
+	{
 		Optional<RoomEntity> optRoom = null;
 
 		if (id != null)
@@ -43,5 +51,11 @@ public class RoomController
 			return optRoom.get();
 		else
 			return null;
+	}
+
+	@PatchMapping("{id}")
+	RoomEntity update(@PathVariable String id, @RequestBody JsonPatch updatedRoomEntity)
+	{
+		return service.update(id, updatedRoomEntity);
 	}
 }
