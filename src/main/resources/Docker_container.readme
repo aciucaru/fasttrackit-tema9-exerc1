@@ -1,0 +1,4 @@
+#comenzi pentru generarea imaginii docker mongodb
+docker run -d --name mongodb-v1 -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret -p 27017:27017 mongo
+docker exec -it mongodb-v1 mongo
+use rooms
